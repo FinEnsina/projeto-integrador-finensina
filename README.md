@@ -16,7 +16,7 @@ Por meio de jogos, conteúdos multimídia e uma trilha de aprendizado dividida e
 
 ## 👥 Equipe de Desenvolvimento
 - **Eduardo Campos dos Santos** - RA: 123456 - [@usuario1](https://github.com/usuario1) - 
-- **Jefferson de Padua Coelho Ribeiro** - RA: 789012 - [@usuario2](https://github.com/usuario2) - 
+- **Jefferson de Padua Coelho Ribeiro** - RA: 789012 - [@usuario2](https://github.com/jeffpcr) - 
 - **Karine Fernandes e Silva** - RA: 345678 - [@usuario3](https://github.com/usuario3) -
 - **Sarah Quinteiro Limeira da Silva** - RA: 2161392413027 - [@usuario4](https://github.com/sarahquinteiro) -  
 
