@@ -1,6 +1,3 @@
-bash
-
-cat > README.md << 'EOF'
 # FinEnsina - Website
 
 ## 🌐 Sobre o Projeto
