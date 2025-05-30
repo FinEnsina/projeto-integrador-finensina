@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinEnsina</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo">FinEnsina</div>
+        <nav class="nav-links">
+            <a href="#" id="homeLink">HOME</a>
+            <a href="#">PLANOS</a>
+        </nav>
+        <a href="#" id="loginLink" class="header-login">LOGIN</a>
+    </header>
+
+    <div class="main-content">
+        <!-- Homepage Content -->
+        <div id="homepage" class="homepage">
+            <div class="banner">
+                <div class="banner-content">
+                    <h2>Aprenda Finanças de Forma Divertida</h2>
+                    <p>Domine os conceitos financeiros essenciais com nossos jogos educativos e interativos</p>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <div class="content-image"
+                    style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
+                </div>
+                <div class="content-text">
+                    <h3>Jogo do Orçamento</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
+                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex</p>
+                    <a href="#" class="play-btn">JOGAR</a>
+                </div>
+            </div>
+
+            <div class="content-section reverse">
+                <div class="content-image"
+                    style="background-image: url('https://images.unsplash.com/photo-1553729459-efe14ef6055d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
+                </div>
+                <div class="content-text">
+                    <h3>Investimento Seguro</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
+                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex</p>
+                    <a href="#" class="play-btn">JOGAR</a>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <div class="content-image"
+                    style="background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
+                </div>
+                <div class="content-text">
+                    <h3>Desafio das Dívidas</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
+                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex</p>
+                    <a href="#" class="play-btn">JOGAR</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Auth Container -->
+        <div id="authContainer" class="auth-container">
+            <div class="login-box">
+                <!-- Login Form -->
+                <form id="loginForm" class="form-panel active">
+                    <h1 class="form-title">FinEnsina</h1>
+
+                    <div class="form-group">
+                        <label>E-mail</label>
+                        <i class="fas fa-envelope input-icon"></i>
+                        <input type="email" class="form-input" placeholder="Digite seu e-mail" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Senha</label>
+                        <i class="fas fa-lock input-icon"></i>
+                        <input type="password" class="form-input" placeholder="Digite sua Senha" required>
+                    </div>
+
+                    <button type="button" class="submit-btn">Login</button>
+
+                    <p class="toggle-form" onclick="toggleForms()">Não possui uma Conta? Registre-se</p>
+                </form>
+
+                <!-- Signup Form -->
+                <form id="signupForm" class="form-panel">
+                    <h1 class="form-title">Criar Conta</h1>
+
+                    <div class="form-group">
+                        <label>Nome Completo</label>
+                        <i class="fas fa-user input-icon"></i>
+                        <input type="text" class="form-input" placeholder="Digite seu Nome Completo" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>E-mail</label>
+                        <i class="fas fa-envelope input-icon"></i>
+                        <input type="email" class="form-input" placeholder="Digite seu mail" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Senha</label>
+                        <i class="fas fa-lock input-icon"></i>
+                        <input type="password" class="form-input" placeholder="Digite a Senha" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Confirmar Senha</label>
+                        <i class="fas fa-lock input-icon"></i>
+                        <input type="password" class="form-input" placeholder="Confirme a Senha" required>
+                    </div>
+
+                    <button type="button" class="submit-btn">Criar Account</button>
+
+                    <p class="toggle-form" onclick="toggleForms()">Já possui uma Conta? Faça o Login</p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-address">
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Rua Pedro Rissato, 30 - Vila dos Remédios - Osasco-SP</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span>(055) 1234-5678</span>
+                </div>
+            </div>
+
+            <div class="social-links">
+                <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+
+            <div class="footer-links">
+                <a href="#">ABOUT US</a>
+                <a href="#">CONTACT US</a>
+                <a href="#">HELP</a>
+                <a href="#">PRINCY POLICY</a>
+                <a href="#">DISCLAIMER</a>
+            </div>
+
+            <div class="copyright">
+                Copyright © 2025
+            </div>
+        </div>
+    </footer>
+    <script src = "script.js"></script>
+</body>
+</html>
