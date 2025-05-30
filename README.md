@@ -6,7 +6,7 @@ O site será uma plataforma interativa de educação financeira voltada para jov
 Por meio de jogos, conteúdos multimídia e uma trilha de aprendizado dividida em níveis, buscamos engajar os jovens e ajudá-los a desenvolver habilidades financeiras essenciais, promovendo a responsabilidade e a reflexão sobre seu próprio progresso.
 
 **Objetivos:**
--Trilha de Aprendizado: Ela incentiva a responsabilidade no aprendizado, permitindo que os jovens acompanhem seu progresso e apliquem os conceitos financeiros no mundo real.
+- Trilha de Aprendizado: Ela incentiva a responsabilidade no aprendizado, permitindo que os jovens acompanhem seu progresso e apliquem os conceitos financeiros no mundo real.
 - Conteúdo Educativo: São recursos voltados para o ensino de conceitos financeiros fundamentais de maneira didática, como jogos, quizzes e atividades baseadas em situações do cotidiano.  
 - Conteúdo Interativo: São atividades que incentivam a participação ativa do usuário, como simulações financeiras, desafios práticos e tarefas personalizadas. 
 - Conteúdo Informativo: Incluem materiais educativos mais profundos, como artigos, vídeos do YouTube e outros recursos externos que oferecem explicações detalhadas sobre tópicos financeiros.
