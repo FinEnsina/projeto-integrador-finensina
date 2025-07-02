@@ -48,6 +48,9 @@ function logout() {
     homepage.classList.add('active');
     authContainer.classList.remove('active');
     quizContainer.style.display = 'none';
+    trilhasContainer.style.display = 'none';
+    rankingContainer.style.display = 'none';
+    progressoContainer.style.display = 'none';
     document.body.style.background = 'var(--color-header-purple)';
     
     // Remover classe quiz-active
@@ -66,10 +69,14 @@ const loginLink = document.getElementById('loginLink');
 const logoutLink = document.getElementById('logoutLink');
 const hamburgerIcon = document.getElementById('hamburgerIcon');
 const hamburgerMenu = document.getElementById('hamburgerMenu');
-const profileLink = document.getElementById('profileLink');
+const trilhasLink = document.getElementById('trilhasLink');
+const rankingLink = document.getElementById('rankingLink');
 const progressLink = document.getElementById('progressLink');
 const homepage = document.getElementById('homepage');
 const authContainer = document.getElementById('authContainer');
+const trilhasContainer = document.getElementById('trilhasContainer');
+const rankingContainer = document.getElementById('rankingContainer');
+const progressoContainer = document.getElementById('progressoContainer');
 
 // ========================================
 // MENU HAMBÚRGUER
@@ -99,15 +106,21 @@ logoutLink.addEventListener('click', function (e) {
     hamburgerMenu.classList.remove('active');
 });
 
-profileLink.addEventListener('click', function (e) {
+trilhasLink.addEventListener('click', function (e) {
     e.preventDefault();
-    showMessage('Funcionalidade em desenvolvimento!', false);
+    showTrilhas();
+    hamburgerMenu.classList.remove('active');
+});
+
+rankingLink.addEventListener('click', function (e) {
+    e.preventDefault();
+    showRanking();
     hamburgerMenu.classList.remove('active');
 });
 
 progressLink.addEventListener('click', function (e) {
     e.preventDefault();
-    showMessage('Funcionalidade em desenvolvimento!', false);
+    showProgresso();
     hamburgerMenu.classList.remove('active');
 });
 
@@ -120,6 +133,9 @@ homeLink.addEventListener('click', function (e) {
     homepage.classList.add('active');
     authContainer.classList.remove('active');
     quizContainer.style.display = 'none';
+    trilhasContainer.style.display = 'none';
+    rankingContainer.style.display = 'none';
+    progressoContainer.style.display = 'none';
     document.body.style.background = 'var(--color-header-purple)';
     
     // Remover classe quiz-active
@@ -132,6 +148,9 @@ loginLink.addEventListener('click', function (e) {
     authContainer.classList.add('active');
     homepage.classList.remove('active');
     quizContainer.style.display = 'none';
+    trilhasContainer.style.display = 'none';
+    rankingContainer.style.display = 'none';
+    progressoContainer.style.display = 'none';
     document.body.style.background = 'var(--color-light-beige)';
     
     document.getElementById('signupForm').classList.remove('active');
@@ -158,7 +177,7 @@ window.addEventListener('DOMContentLoaded', function () {
     const playQuizBtn = document.getElementById('playQuizBtn');
     if (playQuizBtn) {
         playQuizBtn.addEventListener('click', function() {
-            startQuiz();
+            showTrilhas();
         });
     }
 });
@@ -210,36 +229,32 @@ loginForm.addEventListener('submit', async function (e) {
     const data = await res.json();
     
     if (data.success) {
-        // Salva usuario_id e nome no localStorage
         localStorage.setItem('usuario_id', data.id);
         localStorage.setItem('user_name', data.nome);
-        
-        // Atualiza interface
         updateUserInterface();
-        
         showMessage('Login realizado com sucesso!', false);
         
-        // Sincroniza progresso local com backend
+        // Sincronizar progresso local
         syncLocalProgress(data.id);
         
-        setTimeout(() => { startQuiz(); }, 1200);
+        // Ir para trilhas
+        showTrilhas();
     } else {
-        showMessage(data.message || 'Erro ao fazer login.');
+        showMessage(data.message || 'Erro no login');
     }
 });
 
-// Cadastro
+// Signup
 const signupForm = document.getElementById('signupForm');
 signupForm.addEventListener('submit', async function (e) {
     e.preventDefault();
-    
     const nome = signupForm.querySelector('input[type="text"]').value;
-    const email = signupForm.querySelectorAll('input[type="email"]')[0].value;
+    const email = signupForm.querySelector('input[type="email"]').value;
     const senha = signupForm.querySelectorAll('input[type="password"]')[0].value;
-    const confirmar = signupForm.querySelectorAll('input[type="password"]')[1].value;
+    const confirmarSenha = signupForm.querySelectorAll('input[type="password"]')[1].value;
     
-    if (senha !== confirmar) {
-        showMessage('As senhas não coincidem!');
+    if (senha !== confirmarSenha) {
+        showMessage('As senhas não coincidem');
         return;
     }
     
@@ -251,86 +266,271 @@ signupForm.addEventListener('submit', async function (e) {
     const data = await res.json();
     
     if (data.success) {
-        showMessage('Cadastro realizado! Faça login.', false);
+        showMessage('Conta criada com sucesso! Faça login.', false);
         toggleForms();
     } else {
-        showMessage(data.message || 'Erro ao cadastrar.');
+        showMessage(data.error || 'Erro no cadastro');
     }
 });
 
 // ========================================
-// QUIZ
+// TRILHAS
 // ========================================
 
-// Perguntas do quiz
-const quizQuestions = [
-    {
-        question: 'O que é um orçamento?',
-        options: [
-            'Um tipo de investimento',
-            'Um planejamento de receitas e despesas',
-            'Um imposto cobrado pelo governo',
-            'Uma conta bancária especial'
-        ],
-        answer: 1
-    },
-    {
-        question: 'Qual destas é uma boa prática financeira?',
-        options: [
-            'Gastar todo o dinheiro assim que receber',
-            'Guardar parte do dinheiro para emergências',
-            'Comprar tudo parcelado',
-            'Nunca anotar os gastos'
-        ],
-        answer: 1
-    },
-    {
-        question: 'O que significa investir?',
-        options: [
-            'Guardar dinheiro embaixo do colchão',
-            'Aplicar dinheiro para tentar obter mais no futuro',
-            'Gastar em jogos e brinquedos',
-            'Pagar contas atrasadas'
-        ],
-        answer: 1
-    },
-    {
-        question: 'O que é uma despesa?',
-        options: [
-            'Dinheiro que você recebe',
-            'Dinheiro que você gasta',
-            'Dinheiro que você empresta',
-            'Dinheiro que você encontra na rua'
-        ],
-        answer: 1
-    },
-    {
-        question: 'Por que é importante comparar preços antes de comprar?',
-        options: [
-            'Para gastar mais',
-            'Para economizar e fazer boas escolhas',
-            'Para perder tempo',
-            'Para agradar os vendedores'
-        ],
-        answer: 1
+// Função para mostrar trilhas
+async function showTrilhas() {
+    homepage.classList.remove('active');
+    authContainer.classList.remove('active');
+    quizContainer.style.display = 'none';
+    rankingContainer.style.display = 'none';
+    progressoContainer.style.display = 'none';
+    trilhasContainer.style.display = 'block';
+    document.body.style.background = 'var(--color-light-beige)';
+    
+    try {
+        const response = await fetch('backend/get_trilhas.php');
+        const data = await response.json();
+        
+        if (data.success) {
+            renderTrilhas(data.trilhas);
+        } else {
+            showMessage('Erro ao carregar trilhas');
+        }
+    } catch (error) {
+        showMessage('Erro ao carregar trilhas');
     }
-];
+}
 
+// Função para renderizar trilhas
+function renderTrilhas(trilhas) {
+    const trilhasGrid = document.getElementById('trilhasGrid');
+    trilhasGrid.innerHTML = '';
+    
+    trilhas.forEach(trilha => {
+        const trilhaCard = document.createElement('div');
+        trilhaCard.className = 'trilha-card';
+        trilhaCard.style.setProperty('--trilha-color', trilha.cor_hex);
+        
+        trilhaCard.innerHTML = `
+            <div class="trilha-header">
+                <div class="trilha-icon">
+                    <i class="${trilha.icone}"></i>
+                </div>
+                <div class="trilha-info">
+                    <h3>${trilha.nome}</h3>
+                    <span class="trilha-dificuldade dificuldade-${trilha.dificuldade}">
+                        ${trilha.dificuldade}
+                    </span>
+                </div>
+            </div>
+            <p class="trilha-descricao">${trilha.descricao}</p>
+            <div class="trilha-footer">
+                <div class="trilha-stats">
+                    <span><i class="fas fa-question-circle"></i> 5 perguntas</span>
+                    <span><i class="fas fa-clock"></i> ~5 min</span>
+                </div>
+                <button class="play-trilha-btn" onclick="startTrilha(${trilha.id}, '${trilha.nome}')">
+                    Jogar Trilha
+                </button>
+            </div>
+        `;
+        
+        trilhasGrid.appendChild(trilhaCard);
+    });
+}
+
+// ========================================
+// RANKING
+// ========================================
+
+// Função para mostrar ranking
+async function showRanking() {
+    homepage.classList.remove('active');
+    authContainer.classList.remove('active');
+    quizContainer.style.display = 'none';
+    trilhasContainer.style.display = 'none';
+    progressoContainer.style.display = 'none';
+    rankingContainer.style.display = 'block';
+    document.body.style.background = 'var(--color-light-beige)';
+    
+    loadRanking();
+}
+
+// Função para carregar ranking
+async function loadRanking() {
+    try {
+        const response = await fetch('backend/get_ranking.php');
+        const data = await response.json();
+        
+        if (data.success) {
+            renderRanking(data.ranking);
+        } else {
+            showMessage('Erro ao carregar ranking');
+        }
+    } catch (error) {
+        showMessage('Erro ao carregar ranking');
+    }
+}
+
+// Função para renderizar ranking
+function renderRanking(ranking) {
+    const rankingContent = document.getElementById('rankingContent');
+    
+    if (ranking.length === 0) {
+        rankingContent.innerHTML = '<p style="text-align: center; color: var(--color-gray-text);">Nenhum resultado encontrado</p>';
+        return;
+    }
+    
+    rankingContent.innerHTML = ranking.map((item, index) => {
+        const posicaoClass = index < 3 ? ['ouro', 'prata', 'bronze'][index] : 'outros';
+        const posicaoIcon = index < 3 ? ['🥇', '🥈', '🥉'][index] : item.posicao;
+        
+        return `
+            <div class="ranking-item">
+                <div class="ranking-posicao ${posicaoClass}">
+                    ${posicaoIcon}
+                </div>
+                <div class="ranking-info">
+                    <div class="ranking-nome">${item.nome}</div>
+                    <div class="ranking-stats">
+                        <span>Melhor: ${item.melhor_pontuacao} pts</span>
+                        <span>Tentativas: ${item.tentativas}</span>
+                    </div>
+                </div>
+                <div class="ranking-pontos">
+                    ${item.pontuacao_total} pts
+                </div>
+            </div>
+        `;
+    }).join('');
+}
+
+
+
+// ========================================
+// PROGRESSO
+// ========================================
+
+// Função para mostrar progresso
+async function showProgresso() {
+    const usuario_id = localStorage.getItem('usuario_id');
+    if (!usuario_id) {
+        showMessage('Faça login para ver seu progresso');
+        return;
+    }
+    
+    homepage.classList.remove('active');
+    authContainer.classList.remove('active');
+    quizContainer.style.display = 'none';
+    trilhasContainer.style.display = 'none';
+    rankingContainer.style.display = 'none';
+    progressoContainer.style.display = 'block';
+    document.body.style.background = 'var(--color-light-beige)';
+    
+    try {
+        const response = await fetch(`backend/get_progresso.php?usuario_id=${usuario_id}`);
+        const data = await response.json();
+        
+        if (data.success) {
+            renderProgresso(data);
+        } else {
+            showMessage('Erro ao carregar progresso');
+        }
+    } catch (error) {
+        showMessage('Erro ao carregar progresso');
+    }
+}
+
+// Função para renderizar progresso
+function renderProgresso(data) {
+    // Estatísticas
+    document.getElementById('totalPontos').textContent = data.estatisticas.pontuacao_total || 0;
+    document.getElementById('trilhasCompletas').textContent = data.estatisticas.trilhas_completas || 0;
+    document.getElementById('conquistasGanhas').textContent = data.conquistas.length;
+    document.getElementById('tempoTotal').textContent = Math.round((data.estatisticas.tempo_total || 0) / 60);
+    
+    // Conquistas
+    const conquistasList = document.getElementById('conquistasList');
+    if (data.conquistas.length === 0) {
+        conquistasList.innerHTML = '<p style="color: var(--color-gray-text);">Nenhuma conquista ainda. Continue jogando!</p>';
+    } else {
+        conquistasList.innerHTML = data.conquistas.map(conquista => `
+            <div class="conquista-item">
+                <div class="conquista-icon">
+                    <i class="${conquista.icone}"></i>
+                </div>
+                <div class="conquista-info">
+                    <h4>${conquista.nome}</h4>
+                    <p>${conquista.descricao}</p>
+                </div>
+            </div>
+        `).join('');
+    }
+    
+    // Histórico
+    const historicoList = document.getElementById('historicoList');
+    if (data.historico.length === 0) {
+        historicoList.innerHTML = '<p style="color: var(--color-gray-text);">Nenhum histórico ainda. Comece uma trilha!</p>';
+    } else {
+        historicoList.innerHTML = data.historico.slice(0, 5).map(item => `
+            <div class="historico-item">
+                <div class="historico-icon" style="background: ${item.cor_hex}">
+                    <i class="${item.icone}"></i>
+                </div>
+                <div class="historico-info">
+                    <h4>${item.trilha_nome}</h4>
+                    <p>${item.acertos}/${item.total_perguntas} acertos • ${Math.round(item.tempo_gasto / 60)}min</p>
+                </div>
+                <div class="historico-pontos">
+                    ${item.pontuacao} pts
+                </div>
+            </div>
+        `).join('');
+    }
+}
+
+// ========================================
+// QUIZ AVANÇADO
+// ========================================
+
+let currentTrilha = null;
+let quizQuestions = [];
 let currentQuestion = 0;
 let score = 0;
+let startTime = null;
 
 const quizContainer = document.getElementById('quizContainer');
 const quizContent = document.getElementById('quizContent');
 const quizProgress = document.getElementById('quizProgress');
+const quizTitle = document.getElementById('quizTitle');
 const nextQuestionBtn = document.getElementById('nextQuestionBtn');
 const quizResult = document.getElementById('quizResult');
+
+// Função para iniciar uma trilha específica
+async function startTrilha(trilhaId, trilhaNome) {
+    currentTrilha = { id: trilhaId, nome: trilhaNome };
+    
+    try {
+        const response = await fetch(`backend/get_perguntas.php?trilha_id=${trilhaId}`);
+        const data = await response.json();
+        
+        if (data.success && data.perguntas.length > 0) {
+            quizQuestions = data.perguntas;
+            startQuiz();
+        } else {
+            showMessage('Erro ao carregar perguntas da trilha');
+        }
+    } catch (error) {
+        showMessage('Erro ao carregar perguntas da trilha');
+    }
+}
 
 // Função para salvar progresso localmente
 function saveLocalProgress(pontuacao) {
     const progressData = {
+        trilha_id: currentTrilha.id,
         pontuacao: pontuacao,
-        data: new Date().toISOString(),
-        quiz_id: 1
+        data: new Date().toISOString()
     };
     localStorage.setItem('quiz_progress', JSON.stringify(progressData));
 }
@@ -345,15 +545,20 @@ function syncLocalProgress(usuario_id) {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ 
                 usuario_id, 
-                quiz_id: progress.quiz_id, 
-                pontuacao: progress.pontuacao 
+                trilha_id: progress.trilha_id, 
+                pontuacao: progress.pontuacao,
+                total_perguntas: quizQuestions.length,
+                acertos: score,
+                tempo_gasto: Math.floor((Date.now() - startTime) / 1000)
             })
         })
         .then(res => res.json())
         .then(data => {
             if (data.success) {
                 localStorage.removeItem('quiz_progress');
-                showMessage('Progresso sincronizado!', false);
+                if (data.conquistas_ganhas && data.conquistas_ganhas.length > 0) {
+                    showMessage(`Parabéns! Você ganhou ${data.conquistas_ganhas.length} conquista(s)!`, false);
+                }
             }
         })
         .catch(() => {
@@ -369,10 +574,10 @@ function showQuestion(index) {
     quizContent.innerHTML = `
         <div class="quiz-question">${q.question}</div>
         <div class="quiz-options">
-            <button class="quiz-option" data-index="0" style="background: var(--color-yellow); color: var(--color-dark-text); border: none; border-radius: 8px; padding: 16px 20px; font-size: 1.1rem; font-weight: 600; cursor: pointer; text-align: center; width: 100%; min-height: 60px; display: flex; align-items: center; justify-content: center; box-sizing: border-box; margin: 0;">${q.options[0]}</button>
-            <button class="quiz-option" data-index="1" style="background: var(--color-yellow); color: var(--color-dark-text); border: none; border-radius: 8px; padding: 16px 20px; font-size: 1.1rem; font-weight: 600; cursor: pointer; text-align: center; width: 100%; min-height: 60px; display: flex; align-items: center; justify-content: center; box-sizing: border-box; margin: 0;">${q.options[1]}</button>
-            <button class="quiz-option" data-index="2" style="background: var(--color-yellow); color: var(--color-dark-text); border: none; border-radius: 8px; padding: 16px 20px; font-size: 1.1rem; font-weight: 600; cursor: pointer; text-align: center; width: 100%; min-height: 60px; display: flex; align-items: center; justify-content: center; box-sizing: border-box; margin: 0;">${q.options[2]}</button>
-            <button class="quiz-option" data-index="3" style="background: var(--color-yellow); color: var(--color-dark-text); border: none; border-radius: 8px; padding: 16px 20px; font-size: 1.1rem; font-weight: 600; cursor: pointer; text-align: center; width: 100%; min-height: 60px; display: flex; align-items: center; justify-content: center; box-sizing: border-box; margin: 0;">${q.options[3]}</button>
+            <button class="quiz-option" data-index="0">${q.options[0]}</button>
+            <button class="quiz-option" data-index="1">${q.options[1]}</button>
+            <button class="quiz-option" data-index="2">${q.options[2]}</button>
+            <button class="quiz-option" data-index="3">${q.options[3]}</button>
         </div>
     `;
     
@@ -380,16 +585,12 @@ function showQuestion(index) {
     nextQuestionBtn.style.display = 'none';
     quizResult.style.display = 'none';
     
-    // Garantir que o container do quiz tenha a largura correta
-    quizContainer.style.width = '100%';
-    quizContainer.style.maxWidth = '500px';
-    
     // Adiciona listeners nas opções
     document.querySelectorAll('.quiz-option').forEach(btn => {
         btn.addEventListener('click', selectOption);
     });
     
-    // Animação GSAP apenas com opacity
+    // Animação GSAP
     if (window.gsap) {
         gsap.from('.quiz-question', {opacity: 0, duration: 0.6});
         gsap.from('.quiz-option', {opacity: 0, duration: 0.4, stagger: 0.1});
@@ -432,36 +633,58 @@ nextQuestionBtn.addEventListener('click', () => {
 });
 
 function showQuizResult() {
+    const tempoGasto = Math.floor((Date.now() - startTime) / 1000);
+    const porcentagem = Math.round((score / quizQuestions.length) * 100);
+    
     quizContent.innerHTML = '';
     quizProgress.textContent = '';
     quizResult.style.display = 'block';
-    quizResult.innerHTML = `<h3>Parabéns! Você acertou ${score} de ${quizQuestions.length} perguntas.</h3>`;
+    quizResult.innerHTML = `
+        <h3>Parabéns! Você completou "${currentTrilha.nome}"</h3>
+        <div class="result-stats">
+            <p><strong>Pontuação:</strong> ${score}/${quizQuestions.length} (${porcentagem}%)</p>
+            <p><strong>Tempo:</strong> ${Math.round(tempoGasto / 60)} minutos</p>
+            <p><strong>Pontos ganhos:</strong> ${score * 10}</p>
+        </div>
+        <button id="voltarTrilhasBtn" class="voltar-trilhas-btn">Voltar às Trilhas</button>
+    `;
+    
+    // Adicionar listener para o botão voltar
+    document.getElementById('voltarTrilhasBtn').addEventListener('click', function() {
+        showTrilhas();
+    });
+    
     if (window.gsap) {
         gsap.from('#quizResult', {scale: 0.7, opacity: 0, duration: 0.7});
     }
     nextQuestionBtn.style.display = 'none';
     
-    // Salvar progresso localmente
-    saveLocalProgress(score);
-    
-    // Se estiver logado, salvar também no backend
+    // Salvar progresso
     const usuario_id = localStorage.getItem('usuario_id');
     if (usuario_id) {
         fetch('backend/save_progress.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ usuario_id, quiz_id: 1, pontuacao: score })
+            body: JSON.stringify({ 
+                usuario_id, 
+                trilha_id: currentTrilha.id, 
+                pontuacao: score * 10,
+                total_perguntas: quizQuestions.length,
+                acertos: score,
+                tempo_gasto: tempoGasto
+            })
         })
         .then(res => res.json())
         .then(data => {
             if (data.success) {
-                showMessage('Progresso salvo!', false);
-            } else {
-                showMessage('Não foi possível salvar o progresso.');
+                if (data.conquistas_ganhas && data.conquistas_ganhas.length > 0) {
+                    showMessage(`Parabéns! Você ganhou ${data.conquistas_ganhas.length} conquista(s)!`, false);
+                }
             }
         })
         .catch(() => showMessage('Erro ao salvar progresso.'));
     } else {
+        saveLocalProgress(score * 10);
         showMessage('Progresso salvo localmente!', false);
     }
 }
@@ -470,9 +693,16 @@ function showQuizResult() {
 function startQuiz() {
     homepage.classList.remove('active');
     authContainer.classList.remove('active');
+    trilhasContainer.style.display = 'none';
+    rankingContainer.style.display = 'none';
+    progressoContainer.style.display = 'none';
     quizContainer.style.display = 'flex';
+    
     currentQuestion = 0;
     score = 0;
+    startTime = Date.now();
+    
+    quizTitle.textContent = `Trilha: ${currentTrilha.nome}`;
     showQuestion(currentQuestion);
     document.body.style.background = 'var(--color-light-beige)';
     

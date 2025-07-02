@@ -12,7 +12,10 @@
 
 <body>
     <header>
-        <div class="logo">FinEnsina</div>
+        <div class="logo">
+            <i class="fas fa-piggy-bank"></i>
+            FinEnsina
+        </div>
         <nav class="nav-links">
             <a href="#" id="homeLink">HOME</a>
             <a href="#">PLANOS</a>
@@ -27,7 +30,8 @@
                     <span></span>
                 </div>
                 <div class="hamburger-content" id="hamburgerContent">
-                    <a href="#" id="profileLink">Meu Perfil</a>
+                    <a href="#" id="trilhasLink">Trilhas</a>
+                    <a href="#" id="rankingLink">Ranking</a>
                     <a href="#" id="progressLink">Meu Progresso</a>
                     <a href="#" id="logoutLink">Sair</a>
                 </div>
@@ -42,48 +46,11 @@
                 <div class="banner-content">
                     <h2>Aprenda Finanças de Forma Divertida</h2>
                     <p>Domine os conceitos financeiros essenciais com nossos jogos educativos e interativos</p>
-                    <button id="playQuizBtn" class="play-btn" style="margin-top: 20px;">JOGAR QUIZ</button>
+                    <button id="playQuizBtn" class="play-btn" style="margin-top: 20px;">TRILHAS</button>
                 </div>
             </div>
 
-            <div class="content-section">
-                <div class="content-image"
-                    style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
-                </div>
-                <div class="content-text">
-                    <h3>Jogo do Orçamento</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
-                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex</p>
-                    <a href="#" class="play-btn">JOGAR</a>
-                </div>
-            </div>
-
-            <div class="content-section reverse">
-                <div class="content-image"
-                    style="background-image: url('https://images.unsplash.com/photo-1553729459-efe14ef6055d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
-                </div>
-                <div class="content-text">
-                    <h3>Investimento Seguro</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
-                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex</p>
-                    <a href="#" class="play-btn">JOGAR</a>
-                </div>
-            </div>
-
-            <div class="content-section">
-                <div class="content-image"
-                    style="background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
-                </div>
-                <div class="content-text">
-                    <h3>Desafio das Dívidas</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
-                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex</p>
-                    <a href="#" class="play-btn">JOGAR</a>
-                </div>
-            </div>
+            
         </div>
 
         <!-- Auth Container -->
@@ -144,15 +111,74 @@
                 </form>
             </div>
         </div>
+        <!-- Trilhas Container -->
+        <div id="trilhasContainer" class="trilhas-container" style="display:none;">
+            <div class="trilhas-header">
+                <h2>Escolha sua Trilha de Aprendizado</h2>
+                <p>Selecione uma trilha para começar sua jornada de educação financeira</p>
+            </div>
+            <div id="trilhasGrid" class="trilhas-grid"></div>
+        </div>
+
         <!-- Quiz Container -->
         <div id="quizContainer" class="quiz-container" style="display:none;">
             <div class="quiz-header">
-                <h2>Trilha do Quiz: Finanças Básicas</h2>
+                <h2 id="quizTitle">Trilha do Quiz</h2>
                 <div id="quizProgress"></div>
             </div>
             <div id="quizContent"></div>
             <button id="nextQuestionBtn" style="display:none;">Próxima</button>
             <div id="quizResult" style="display:none;"></div>
+        </div>
+
+        <!-- Ranking Container -->
+        <div id="rankingContainer" class="ranking-container" style="display:none;">
+            <div class="ranking-header">
+                <h2>🏆 Ranking dos Melhores</h2>
+                <div class="ranking-tabs">
+                    <button class="ranking-tab active" data-type="geral">Ranking Geral</button>
+                </div>
+            </div>
+            <div id="rankingContent" class="ranking-content"></div>
+        </div>
+
+        <!-- Progresso Container -->
+        <div id="progressoContainer" class="progresso-container" style="display:none;">
+            <div class="progresso-header">
+                <h2>📊 Meu Progresso</h2>
+            </div>
+            <div class="progresso-stats">
+                <div class="stat-card">
+                    <i class="fas fa-trophy"></i>
+                    <h3 id="totalPontos">0</h3>
+                    <p>Pontos Totais</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-check-circle"></i>
+                    <h3 id="trilhasCompletas">0</h3>
+                    <p>Trilhas Completas</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-star"></i>
+                    <h3 id="conquistasGanhas">0</h3>
+                    <p>Conquistas</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-clock"></i>
+                    <h3 id="tempoTotal">0</h3>
+                    <p>Minutos Jogados</p>
+                </div>
+            </div>
+            <div class="progresso-sections">
+                <div class="progresso-section">
+                    <h3>🏆 Conquistas</h3>
+                    <div id="conquistasList" class="conquistas-list"></div>
+                </div>
+                <div class="progresso-section">
+                    <h3>📈 Histórico Recente</h3>
+                    <div id="historicoList" class="historico-list"></div>
+                </div>
+            </div>
         </div>
     </div>
 
