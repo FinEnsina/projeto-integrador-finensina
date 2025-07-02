@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FinEnsina</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -16,7 +17,22 @@
             <a href="#" id="homeLink">HOME</a>
             <a href="#">PLANOS</a>
         </nav>
-        <a href="#" id="loginLink" class="header-login">LOGIN</a>
+        <div class="user-section">
+            <span id="userName" style="display: none; color: var(--color-white); margin-right: 15px; font-weight: 600;"></span>
+            <a href="#" id="loginLink" class="header-login">LOGIN</a>
+            <div class="hamburger-menu" id="hamburgerMenu" style="display: none;">
+                <div class="hamburger-icon" id="hamburgerIcon">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <div class="hamburger-content" id="hamburgerContent">
+                    <a href="#" id="profileLink">Meu Perfil</a>
+                    <a href="#" id="progressLink">Meu Progresso</a>
+                    <a href="#" id="logoutLink">Sair</a>
+                </div>
+            </div>
+        </div>
     </header>
 
     <div class="main-content">
@@ -26,6 +42,7 @@
                 <div class="banner-content">
                     <h2>Aprenda Finanças de Forma Divertida</h2>
                     <p>Domine os conceitos financeiros essenciais com nossos jogos educativos e interativos</p>
+                    <button id="playQuizBtn" class="play-btn" style="margin-top: 20px;">JOGAR QUIZ</button>
                 </div>
             </div>
 
@@ -88,7 +105,7 @@
                         <input type="password" class="form-input" placeholder="Digite sua Senha" required>
                     </div>
 
-                    <button type="button" class="submit-btn">Login</button>
+                    <button type="submit" class="submit-btn">Login</button>
 
                     <p class="toggle-form" onclick="toggleForms()">Não possui uma Conta? Registre-se</p>
                 </form>
@@ -121,11 +138,21 @@
                         <input type="password" class="form-input" placeholder="Confirme a Senha" required>
                     </div>
 
-                    <button type="button" class="submit-btn">Criar Account</button>
+                    <button type="submit" class="submit-btn">Criar Account</button>
 
                     <p class="toggle-form" onclick="toggleForms()">Já possui uma Conta? Faça o Login</p>
                 </form>
             </div>
+        </div>
+        <!-- Quiz Container -->
+        <div id="quizContainer" class="quiz-container" style="display:none;">
+            <div class="quiz-header">
+                <h2>Trilha do Quiz: Finanças Básicas</h2>
+                <div id="quizProgress"></div>
+            </div>
+            <div id="quizContent"></div>
+            <button id="nextQuestionBtn" style="display:none;">Próxima</button>
+            <div id="quizResult" style="display:none;"></div>
         </div>
     </div>
 
@@ -162,6 +189,6 @@
             </div>
         </div>
     </footer>
-    <script src = "script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
