@@ -20,7 +20,6 @@ Por meio de jogos, conteúdos multimídia e uma trilha de aprendizado dividida e
 - **MYSQL**
 
 ## 👥 Equipe de Desenvolvimento
-- **Eduardo Campos dos Santos** - RA: 2161392413 - [@usuario1](https://github.com/usuario1) - 
 - **Jefferson de Padua Coelho Ribeiro** - RA: 2161392413009 - [@jeffpcr](https://github.com/jeffpcr) - 
 - **Karine Fernandes e Silva** - RA: 2161392413 - [@karinefes](https://github.com/karinefes) -
 - **Sarah Quinteiro Limeira da Silva** - RA: 2161392413027 - [@sarahquinteiro](https://github.com/sarahquinteiro) -  
