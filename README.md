@@ -28,3 +28,5 @@ Por meio de jogos, conteúdos multimídia e uma trilha de aprendizado dividida e
 
 ## 🚀 Como Executar
 
+Acesse o site: https://educafin.ok.etc.br
+
