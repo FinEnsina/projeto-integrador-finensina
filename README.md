@@ -11,6 +11,8 @@ Por meio de jogos, conteúdos multimídia e uma trilha de aprendizado dividida e
 - Conteúdo Interativo: São atividades que incentivam a participação ativa do usuário, como simulações financeiras, desafios práticos e tarefas personalizadas. 
 - Conteúdo Informativo: Incluem materiais educativos mais profundos, como artigos, vídeos do YouTube e outros recursos externos que oferecem explicações detalhadas sobre tópicos financeiros.
 
+Plano de Projeto: https://www.canva.com/design/DAGhucNhgwY/CjC3b0vT7DGmRPWkIRKo_Q/view?utm_content=DAGhucNhgwY&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hafb63a8ab7
+
 ## 🛠️ Tecnologias Utilizadas
 - **HTML**
 - **CSS**
