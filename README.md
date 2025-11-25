@@ -37,6 +37,7 @@ Ou veja os tópicos principais:
 
 ## 📂 Estrutura do Projeto
 
+```
 projeto-integrador-finensina/
 ├── .github/workflows/      # Configuração de CI/CD
 ├── src/
@@ -52,6 +53,7 @@ projeto-integrador-finensina/
 ├── prisma/                 # Schema e migrations
 ├── public/                 # Arquivos estáticos
 └── README.md               # Documentação
+```
 
 ## 🚀 Como Executar
 
