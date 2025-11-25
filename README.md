@@ -37,6 +37,22 @@ Ou veja os tópicos principais:
 
 ## 📂 Estrutura do Projeto
 
+projeto-integrador-finensina/
+├── .github/workflows/      # Configuração de CI/CD
+├── src/
+│   ├── pages/
+│   │   ├── api/            # Rotas da API RESTful
+│   │   ├── index.jsx       # Página principal
+│   │   ├── jogos/          # Módulos de jogos
+│   │   └── perfil/         # Perfil do usuário
+│   ├── components/         # Componentes reutilizáveis
+│   ├── hooks/              # Custom Hooks
+│   ├── lib/                # Utilitários
+│   └── tests/              # Testes automatizados
+├── prisma/                 # Schema e migrations
+├── public/                 # Arquivos estáticos
+└── README.md               # Documentação
+
 ## 🚀 Como Executar
 
 Acesse o site: https://educafin.ok.etc.br
