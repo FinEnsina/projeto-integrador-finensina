@@ -23,7 +23,7 @@ Plano de Projeto: https://www.canva.com/design/DAGhucNhgwY/CjC3b0vT7DGmRPWkIRKo_
 
 ## 👥 Equipe de Desenvolvimento
 - **Jefferson de Padua Coelho Ribeiro** - RA: 2161392413009 - [@jeffpcr](https://github.com/jeffpcr) - 
-- **Karine Fernandes e Silva** - RA: 2161392413 - [@karinefes](https://github.com/karinefes) -
+- **Karine Fernandes e Silva** - RA: 2161392413030 - [@karinefes](https://github.com/karinefes) -
 - **Sarah Quinteiro Limeira da Silva** - RA: 2161392413027 - [@sarahquinteiro](https://github.com/sarahquinteiro) -  
 
 ## 📂 Estrutura do Projeto
