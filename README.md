@@ -21,6 +21,15 @@ Plano de Projeto: https://www.canva.com/design/DAGhucNhgwY/CjC3b0vT7DGmRPWkIRKo_
 - **PHP**
 - **MYSQL**
 
+## 📚 Documentação
+
+Para documentação completa do projeto, consulte [DOCUMENTACAO.md](DOCUMENTACAO.md)
+
+Ou veja os tópicos principais:
+- [Arquitetura](DOCUMENTACAO.md#arquitetura)
+- [API](DOCUMENTACAO.md#api)
+- [Deploy](DOCUMENTACAO.md#deploy)
+
 ## 👥 Equipe de Desenvolvimento
 - **Jefferson de Padua Coelho Ribeiro** - RA: 2161392413009 - [@jeffpcr](https://github.com/jeffpcr) - 
 - **Karine Fernandes e Silva** - RA: 2161392413030 - [@karinefes](https://github.com/karinefes) -
