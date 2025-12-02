@@ -11,7 +11,7 @@ class Database {
     private $host = 'localhost';        // Endereço do servidor MySQL
     private $db_name = 'finensina';     // Nome do banco de dados
     private $username = 'root';         // Usuário do MySQL
-    private $password = '';             // Senha do MySQL (deixe vazio se não tiver)
+    private $password = 'S123t$%&*cfg';             // Senha do MySQL (deixe vazio se não tiver)
     private $conn;
     
     /**
