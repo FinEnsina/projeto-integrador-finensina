@@ -11,8 +11,8 @@
  */
 
 return [
-    'client_id' => 'SEU_CLIENT_ID_AQUI.apps.googleusercontent.com',
-    'client_secret' => 'SEU_CLIENT_SECRET_AQUI',
+    'client_id' => '242729659352-rch5h57dssh2jc0655qpe2fok2e7mf5a.apps.googleusercontent.com',
+    'client_secret' => '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',
     'redirect_uri' => 'https://educafin.ok.etc.br/auth/google/callback.php',
     
     // Escopos de permissão solicitados
