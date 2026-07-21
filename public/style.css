@@ -371,14 +371,15 @@
     }
 
     .form-input {
-        width: 100%;
-        padding: 10px 10px 10px 35px;
-        border: none;
-        border-bottom: 2px solid var(--color-yellow);
-        outline: none;
-        font-size: 14px;
-        background-color: transparent;
-    }
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 10px 10px 35px;
+    border: none;
+    border-bottom: 2px solid var(--color-yellow);
+    outline: none;
+    font-size: 14px;
+    background-color: transparent;
+}
 
     .form-input:focus {
         border-bottom-color: var(--color-medium-blue);
@@ -392,23 +393,24 @@
         font-size: 16px;
     }
 
-    .submit-btn {
-        display: block;
-        width: 100%;
-        padding: 14px;
-        background-color: var(--color-dark-green);
-        color: var(--color-white);
-        border: none;
-        border-radius: 6px;
-        font-size: 16px;
-        font-weight: 700;
-        cursor: pointer;
-        text-align: center;
-        text-decoration: none;
-        margin-top: 30px;
-        transition: background-color 0.3s;
-        letter-spacing: 0.5px;
-    }
+ .submit-btn {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 14px;
+    background-color: var(--color-dark-green);
+    color: var(--color-white);
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    margin-top: 30px;
+    transition: background-color 0.3s;
+    letter-spacing: 0.5px;
+}
 
     .submit-btn:hover {
         background-color: var(--color-medium-green);
