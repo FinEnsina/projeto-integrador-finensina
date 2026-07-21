@@ -1,0 +1,122 @@
+// Schema do banco de dados do FinEnsina
+// Reconstruído a partir dos campos usados nos antigos scripts PHP
+// (as tabelas nunca tiveram um .sql commitado no repositório original)
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Usuario {
+  id        Int      @id @default(autoincrement())
+  nome      String
+  email     String   @unique
+  senha     String
+  criadoEm  DateTime @default(now()) @map("criado_em")
+
+  progresso  ProgressoUsuario[]
+  ranking    Ranking[]
+  conquistas ConquistaUsuario[]
+
+  @@map("usuarios")
+}
+
+model Trilha {
+  id         Int      @id @default(autoincrement())
+  nome       String
+  descricao  String
+  dificuldade String  // "facil" | "medio" | "dificil"
+  corHex     String   @map("cor_hex")
+  icone      String   // classe do Font Awesome, ex: "fas fa-piggy-bank"
+  ordem      Int      @default(0)
+  ativo      Boolean  @default(true)
+
+  perguntas  Pergunta[]
+  progresso  ProgressoUsuario[]
+  ranking    Ranking[]
+
+  @@map("trilhas")
+}
+
+model Pergunta {
+  id               Int     @id @default(autoincrement())
+  trilhaId         Int     @map("trilha_id")
+  pergunta         String
+  opcaoA           String  @map("opcao_a")
+  opcaoB           String  @map("opcao_b")
+  opcaoC           String  @map("opcao_c")
+  opcaoD           String  @map("opcao_d")
+  respostaCorreta  String  @map("resposta_correta") // "a" | "b" | "c" | "d"
+  explicacao       String
+  pontos           Int     @default(10)
+  ordem            Int     @default(0)
+  ativo            Boolean @default(true)
+
+  trilha Trilha @relation(fields: [trilhaId], references: [id], onDelete: Cascade)
+
+  @@map("perguntas")
+}
+
+model ProgressoUsuario {
+  id             Int      @id @default(autoincrement())
+  usuarioId      Int      @map("usuario_id")
+  trilhaId       Int      @map("trilha_id")
+  pontuacao      Int
+  totalPerguntas Int      @map("total_perguntas")
+  acertos        Int
+  tempoGasto     Int      @map("tempo_gasto") // segundos
+  dataConclusao  DateTime @default(now()) @map("data_conclusao")
+
+  usuario Usuario @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+  trilha  Trilha  @relation(fields: [trilhaId], references: [id], onDelete: Cascade)
+
+  @@map("progresso_usuario")
+}
+
+model Ranking {
+  id                Int      @id @default(autoincrement())
+  usuarioId         Int      @map("usuario_id")
+  trilhaId          Int      @map("trilha_id")
+  pontuacaoTotal    Int      @default(0) @map("pontuacao_total")
+  melhorPontuacao   Int      @default(0) @map("melhor_pontuacao")
+  tentativas        Int      @default(0)
+  ultimaAtualizacao DateTime @updatedAt @map("ultima_atualizacao")
+
+  usuario Usuario @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+  trilha  Trilha  @relation(fields: [trilhaId], references: [id], onDelete: Cascade)
+
+  @@unique([usuarioId, trilhaId])
+  @@map("ranking")
+}
+
+model Conquista {
+  id              Int     @id @default(autoincrement())
+  nome            String
+  descricao       String
+  icone           String
+  pontosBonus     Int     @default(0) @map("pontos_bonus")
+  tipo            String  // "trilhas_completas" | "acertos" | "tempo"
+  valorRequerido  Int     @map("valor_requerido")
+  ativo           Boolean @default(true)
+
+  usuarios ConquistaUsuario[]
+
+  @@map("conquistas")
+}
+
+model ConquistaUsuario {
+  id             Int      @id @default(autoincrement())
+  usuarioId      Int      @map("usuario_id")
+  conquistaId    Int      @map("conquista_id")
+  dataConquista  DateTime @default(now()) @map("data_conquista")
+
+  usuario   Usuario   @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+  conquista Conquista @relation(fields: [conquistaId], references: [id], onDelete: Cascade)
+
+  @@unique([usuarioId, conquistaId])
+  @@map("conquistas_usuario")
+}

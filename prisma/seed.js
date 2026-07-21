@@ -1,0 +1,408 @@
+// Popula o banco com as trilhas, perguntas e conquistas do FinEnsina.
+// Rode com: npm run db:seed
+
+const { PrismaClient } = require('@prisma/client');
+const prisma = new PrismaClient();
+
+const trilhas = [
+  {
+    nome: 'Iniciante',
+    descricao: 'Conceitos básicos: a diferença entre necessidade e desejo, e o valor do dinheiro.',
+    dificuldade: 'facil',
+    corHex: '#4CAF50',
+    icone: 'fas fa-seedling',
+    ordem: 1,
+    perguntas: [
+      {
+        pergunta: 'Qual das opções abaixo é uma "necessidade" e não um "desejo"?',
+        opcaoA: 'Um tênis de marca novo',
+        opcaoB: 'Comida para o mês',
+        opcaoC: 'Um videogame novo',
+        opcaoD: 'Ingresso para um show',
+        respostaCorreta: 'b',
+        explicacao: 'Necessidades são itens essenciais para viver, como alimentação, moradia e saúde. Desejos são coisas que gostaríamos de ter, mas não são indispensáveis.',
+        pontos: 10,
+        ordem: 1,
+      },
+      {
+        pergunta: 'O que significa "poder de compra" do dinheiro?',
+        opcaoA: 'A quantidade de notas que você tem na carteira',
+        opcaoB: 'A capacidade de comprar bens e serviços com determinada quantia',
+        opcaoC: 'O limite do seu cartão de crédito',
+        opcaoD: 'A cor da cédula',
+        respostaCorreta: 'b',
+        explicacao: 'Poder de compra é quanto de bens e serviços você consegue adquirir com uma certa quantidade de dinheiro — e isso varia com a inflação.',
+        pontos: 10,
+        ordem: 2,
+      },
+      {
+        pergunta: 'Se a inflação sobe e seu salário continua igual, o que acontece com seu poder de compra?',
+        opcaoA: 'Aumenta',
+        opcaoB: 'Permanece igual',
+        opcaoC: 'Diminui',
+        opcaoD: 'Dobra automaticamente',
+        respostaCorreta: 'c',
+        explicacao: 'Com a inflação, os preços sobem. Se o salário não acompanha, dá para comprar menos coisas com o mesmo valor — ou seja, o poder de compra cai.',
+        pontos: 10,
+        ordem: 3,
+      },
+      {
+        pergunta: 'O que é um orçamento pessoal?',
+        opcaoA: 'Um empréstimo bancário',
+        opcaoB: 'Um planejamento de quanto você ganha e quanto pode gastar',
+        opcaoC: 'Um tipo de investimento',
+        opcaoD: 'A taxa cobrada pelo banco',
+        respostaCorreta: 'b',
+        explicacao: 'Orçamento pessoal é organizar receitas e despesas para saber exatamente para onde o dinheiro está indo, e evitar gastar mais do que se ganha.',
+        pontos: 10,
+        ordem: 4,
+      },
+      {
+        pergunta: 'Qual é o primeiro passo para começar a cuidar bem do seu dinheiro?',
+        opcaoA: 'Pedir um cartão de crédito com limite alto',
+        opcaoB: 'Anotar quanto entra e quanto sai por mês',
+        opcaoC: 'Investir tudo imediatamente',
+        opcaoD: 'Fazer um financiamento',
+        respostaCorreta: 'b',
+        explicacao: 'Antes de investir ou fazer planos maiores, é essencial saber para onde o dinheiro está indo. Registrar entradas e saídas é a base de qualquer planejamento financeiro.',
+        pontos: 10,
+        ordem: 5,
+      },
+    ],
+  },
+  {
+    nome: 'Explorador',
+    descricao: 'Orçamento pessoal e controle de gastos no dia a dia.',
+    dificuldade: 'facil',
+    corHex: '#2196F3',
+    icone: 'fas fa-compass',
+    ordem: 2,
+    perguntas: [
+      {
+        pergunta: 'Qual categoria de gasto costuma ser a maior parte do orçamento de uma família?',
+        opcaoA: 'Lazer',
+        opcaoB: 'Moradia e alimentação',
+        opcaoC: 'Assinaturas de streaming',
+        opcaoD: 'Roupas',
+        respostaCorreta: 'b',
+        explicacao: 'Moradia (aluguel/financiamento, contas) e alimentação costumam representar a maior fatia do orçamento da maioria das famílias.',
+        pontos: 10,
+        ordem: 1,
+      },
+      {
+        pergunta: 'O que é um gasto fixo?',
+        opcaoA: 'Um gasto que muda todo mês, como lazer',
+        opcaoB: 'Um gasto que se repete todo mês com valor parecido, como aluguel',
+        opcaoC: 'Um gasto feito só uma vez na vida',
+        opcaoD: 'Um gasto que você nunca paga',
+        respostaCorreta: 'b',
+        explicacao: 'Gastos fixos se repetem mês a mês com valores parecidos (aluguel, internet, plano de celular). Gastos variáveis mudam de acordo com o consumo (lazer, roupas, etc).',
+        pontos: 10,
+        ordem: 2,
+      },
+      {
+        pergunta: 'Uma boa prática para controlar gastos é:',
+        opcaoA: 'Nunca olhar o extrato bancário',
+        opcaoB: 'Anotar todos os gastos, mesmo os pequenos',
+        opcaoC: 'Gastar tudo assim que recebe',
+        opcaoD: 'Usar o cartão de crédito sem limite definido',
+        respostaCorreta: 'b',
+        explicacao: 'Pequenos gastos somados podem impactar bastante o orçamento no fim do mês. Anotar tudo ajuda a identificar onde é possível economizar.',
+        pontos: 10,
+        ordem: 3,
+      },
+      {
+        pergunta: 'O que é consumo consciente?',
+        opcaoA: 'Comprar por impulso sempre que possível',
+        opcaoB: 'Pensar antes de comprar se você realmente precisa daquilo',
+        opcaoC: 'Comprar apenas produtos caros',
+        opcaoD: 'Nunca gastar dinheiro com nada',
+        respostaCorreta: 'b',
+        explicacao: 'Consumo consciente é refletir sobre a real necessidade e o impacto de uma compra antes de realizá-la, evitando desperdício e endividamento.',
+        pontos: 10,
+        ordem: 4,
+      },
+      {
+        pergunta: 'Se seus gastos do mês foram maiores que sua renda, isso é chamado de:',
+        opcaoA: 'Superávit',
+        opcaoB: 'Déficit',
+        opcaoC: 'Investimento',
+        opcaoD: 'Poupança',
+        respostaCorreta: 'b',
+        explicacao: 'Déficit é quando você gasta mais do que ganha. O oposto (gastar menos do que ganha) é chamado de superávit.',
+        pontos: 10,
+        ordem: 5,
+      },
+    ],
+  },
+  {
+    nome: 'Planejador',
+    descricao: 'Poupança e como definir metas financeiras alcançáveis.',
+    dificuldade: 'medio',
+    corHex: '#FF9800',
+    icone: 'fas fa-piggy-bank',
+    ordem: 3,
+    perguntas: [
+      {
+        pergunta: 'Qual é a principal vantagem de guardar dinheiro em uma reserva de emergência?',
+        opcaoA: 'Ganhar juros altíssimos rapidamente',
+        opcaoB: 'Ter dinheiro disponível para imprevistos sem precisar se endividar',
+        opcaoC: 'Evitar pagar impostos',
+        opcaoD: 'Aumentar o limite do cartão de crédito',
+        respostaCorreta: 'b',
+        explicacao: 'A reserva de emergência serve para cobrir imprevistos (como perda de emprego ou uma despesa médica) sem precisar recorrer a empréstimos ou ao cartão de crédito.',
+        pontos: 15,
+        ordem: 1,
+      },
+      {
+        pergunta: 'Qual característica torna uma meta financeira mais fácil de alcançar?',
+        opcaoA: 'Ser vaga, sem prazo definido',
+        opcaoB: 'Ser específica, com valor e prazo definidos',
+        opcaoC: 'Não ter nenhum planejamento',
+        opcaoD: 'Depender só da sorte',
+        respostaCorreta: 'b',
+        explicacao: 'Metas específicas, com valor e prazo (ex: "guardar R$500 em 5 meses") são mais fáceis de acompanhar e alcançar do que objetivos vagos.',
+        pontos: 15,
+        ordem: 2,
+      },
+      {
+        pergunta: 'O que significa "pagar-se primeiro" no contexto de poupança?',
+        opcaoA: 'Gastar tudo antes de guardar o que sobra',
+        opcaoB: 'Separar uma parte da renda para poupar assim que ela chega, antes de gastar',
+        opcaoC: 'Pedir dinheiro emprestado para investir',
+        opcaoD: 'Comprar presentes para si mesmo todo mês',
+        respostaCorreta: 'b',
+        explicacao: '"Pagar-se primeiro" significa guardar uma parte do dinheiro assim que ele entra, antes de qualquer outro gasto, tratando a poupança como uma prioridade.',
+        pontos: 15,
+        ordem: 3,
+      },
+      {
+        pergunta: 'Quantos meses de despesas uma reserva de emergência costuma cobrir, segundo recomendações comuns?',
+        opcaoA: 'Nenhum, ela não precisa cobrir despesas',
+        opcaoB: 'Entre 3 e 6 meses de despesas essenciais',
+        opcaoC: 'Exatamente 1 dia',
+        opcaoD: '10 anos',
+        respostaCorreta: 'b',
+        explicacao: 'Uma recomendação comum é ter entre 3 e 6 meses de despesas essenciais guardados, para ter tempo de se reorganizar caso perca a renda principal.',
+        pontos: 15,
+        ordem: 4,
+      },
+      {
+        pergunta: 'Qual das opções é um exemplo de meta financeira de curto prazo?',
+        opcaoA: 'Se aposentar aos 60 anos',
+        opcaoB: 'Comprar uma casa em 20 anos',
+        opcaoC: 'Guardar dinheiro para uma viagem em 6 meses',
+        opcaoD: 'Formar uma faculdade para os filhos',
+        respostaCorreta: 'c',
+        explicacao: 'Metas de curto prazo costumam ser alcançadas em até 1 ou 2 anos, como guardar para uma viagem. Metas de longo prazo levam vários anos, como aposentadoria.',
+        pontos: 15,
+        ordem: 5,
+      },
+    ],
+  },
+  {
+    nome: 'Investidor',
+    descricao: 'Introdução ao mundo dos investimentos: CDB, Tesouro Direto e mais.',
+    dificuldade: 'medio',
+    corHex: '#9C27B0',
+    icone: 'fas fa-chart-line',
+    ordem: 4,
+    perguntas: [
+      {
+        pergunta: 'O que é o Tesouro Direto?',
+        opcaoA: 'Um aplicativo de compras',
+        opcaoB: 'Um programa do governo para comprar títulos públicos e investir com segurança',
+        opcaoC: 'Um tipo de cartão de crédito',
+        opcaoD: 'Uma loja de eletrônicos',
+        respostaCorreta: 'b',
+        explicacao: 'O Tesouro Direto é um programa que permite que qualquer pessoa compre títulos da dívida pública do governo federal, considerado um dos investimentos mais seguros do país.',
+        pontos: 20,
+        ordem: 1,
+      },
+      {
+        pergunta: 'O que significa CDB?',
+        opcaoA: 'Cartão de Débito Bancário',
+        opcaoB: 'Certificado de Depósito Bancário',
+        opcaoC: 'Conta de Depósito Básica',
+        opcaoD: 'Crédito Direto ao Banco',
+        respostaCorreta: 'b',
+        explicacao: 'CDB é um título emitido por bancos: ao investir, você empresta dinheiro ao banco e recebe de volta com juros após um período.',
+        pontos: 20,
+        ordem: 2,
+      },
+      {
+        pergunta: 'O que são "juros compostos"?',
+        opcaoA: 'Juros que incidem apenas sobre o valor inicial investido',
+        opcaoB: 'Juros que incidem sobre o valor investido mais os juros já ganhos anteriormente',
+        opcaoC: 'Um tipo de imposto',
+        opcaoD: 'Uma taxa cobrada só uma vez',
+        respostaCorreta: 'b',
+        explicacao: 'Nos juros compostos, os rendimentos de um período passam a fazer parte do capital investido, gerando ainda mais rendimento no período seguinte — é o famoso "juros sobre juros".',
+        pontos: 20,
+        ordem: 3,
+      },
+      {
+        pergunta: 'Entre poupança e Tesouro Direto, qual costuma render mais no longo prazo?',
+        opcaoA: 'A poupança sempre rende mais',
+        opcaoB: 'O Tesouro Direto costuma render mais, dependendo do título e do cenário econômico',
+        opcaoC: 'Os dois rendem exatamente igual sempre',
+        opcaoD: 'Nenhum dos dois rende nada',
+        respostaCorreta: 'b',
+        explicacao: 'Historicamente, títulos do Tesouro Direto (especialmente os atrelados à Selic ou à inflação) costumam ter rendimento superior ao da poupança, embora isso dependa do cenário econômico.',
+        pontos: 20,
+        ordem: 4,
+      },
+      {
+        pergunta: 'Por que a inflação é importante ao escolher um investimento?',
+        opcaoA: 'Ela não tem nenhum efeito nos investimentos',
+        opcaoB: 'Porque um bom investimento deve render acima da inflação para não perder poder de compra',
+        opcaoC: 'Porque ela define a cor da moeda',
+        opcaoD: 'Porque ela é sempre igual a zero',
+        respostaCorreta: 'b',
+        explicacao: 'Se um investimento rende menos que a inflação, na prática você está perdendo dinheiro em termos de poder de compra, mesmo que o valor em reais tenha aumentado.',
+        pontos: 20,
+        ordem: 5,
+      },
+    ],
+  },
+  {
+    nome: 'Expert',
+    descricao: 'Estratégias avançadas e educação financeira para a vida toda.',
+    dificuldade: 'dificil',
+    corHex: '#F44336',
+    icone: 'fas fa-crown',
+    ordem: 5,
+    perguntas: [
+      {
+        pergunta: 'O que é diversificação de investimentos?',
+        opcaoA: 'Colocar todo o dinheiro em um único investimento',
+        opcaoB: 'Distribuir o dinheiro entre diferentes tipos de investimento para reduzir riscos',
+        opcaoC: 'Gastar o dinheiro em várias lojas diferentes',
+        opcaoD: 'Trocar de banco frequentemente',
+        respostaCorreta: 'b',
+        explicacao: 'Diversificar significa não colocar "todos os ovos na mesma cesta": ao espalhar investimentos entre diferentes ativos, reduz-se o risco de perder tudo caso um deles vá mal.',
+        pontos: 25,
+        ordem: 1,
+      },
+      {
+        pergunta: 'O que é liquidez de um investimento?',
+        opcaoA: 'O quanto ele rende por ano',
+        opcaoB: 'A facilidade e rapidez de transformar o investimento em dinheiro disponível',
+        opcaoC: 'O tipo de imposto que ele paga',
+        opcaoD: 'A cor do certificado',
+        respostaCorreta: 'b',
+        explicacao: 'Liquidez é a rapidez com que um investimento pode ser convertido em dinheiro sem perda significativa de valor. Poupança tem alta liquidez; um imóvel tem baixa liquidez.',
+        pontos: 25,
+        ordem: 2,
+      },
+      {
+        pergunta: 'Qual é o risco de colocar toda a reserva de emergência em ações?',
+        opcaoA: 'Não existe risco nenhum',
+        opcaoB: 'Ações podem oscilar muito de valor, e você pode precisar vender no momento errado, com prejuízo',
+        opcaoC: 'Ações são proibidas por lei para reserva de emergência',
+        opcaoD: 'Ações nunca perdem valor',
+        respostaCorreta: 'b',
+        explicacao: 'Ações têm alta volatilidade. Uma reserva de emergência deve priorizar segurança e liquidez, não potencial de ganho — por isso especialistas recomendam investimentos mais estáveis para essa reserva.',
+        pontos: 25,
+        ordem: 3,
+      },
+      {
+        pergunta: 'O que é "perfil de investidor"?',
+        opcaoA: 'O documento de identidade usado para investir',
+        opcaoB: 'A avaliação de quanto risco uma pessoa está disposta e capaz de assumir ao investir',
+        opcaoC: 'O nome de usuário em um aplicativo de banco',
+        opcaoD: 'Um tipo específico de imposto',
+        respostaCorreta: 'b',
+        explicacao: 'O perfil de investidor (conservador, moderado ou arrojado) ajuda a definir que tipos de investimento fazem sentido para cada pessoa, de acordo com sua tolerância a risco e seus objetivos.',
+        pontos: 25,
+        ordem: 4,
+      },
+      {
+        pergunta: 'Por que é importante revisar seu planejamento financeiro periodicamente?',
+        opcaoA: 'Porque a vida e os objetivos financeiros mudam ao longo do tempo',
+        opcaoB: 'Não é importante, um planejamento serve para sempre sem mudanças',
+        opcaoC: 'Só é necessário revisar uma vez, aos 18 anos',
+        opcaoD: 'Apenas bancos precisam revisar planejamentos',
+        respostaCorreta: 'a',
+        explicacao: 'Mudanças de renda, objetivos e cenário econômico exigem ajustes periódicos no planejamento financeiro para que ele continue fazendo sentido e sendo eficaz.',
+        pontos: 25,
+        ordem: 5,
+      },
+    ],
+  },
+];
+
+const conquistas = [
+  {
+    nome: 'Primeiro Passo',
+    descricao: 'Complete sua primeira trilha de aprendizado.',
+    icone: 'fas fa-shoe-prints',
+    pontosBonus: 20,
+    tipo: 'trilhas_completas',
+    valorRequerido: 1,
+  },
+  {
+    nome: 'Em Ritmo',
+    descricao: 'Complete 3 trilhas de aprendizado.',
+    icone: 'fas fa-fire',
+    pontosBonus: 40,
+    tipo: 'trilhas_completas',
+    valorRequerido: 3,
+  },
+  {
+    nome: 'Mestre das Finanças',
+    descricao: 'Complete todas as 5 trilhas disponíveis.',
+    icone: 'fas fa-crown',
+    pontosBonus: 100,
+    tipo: 'trilhas_completas',
+    valorRequerido: 5,
+  },
+  {
+    nome: 'Pontuação Perfeita',
+    descricao: 'Acerte 100% das perguntas em uma trilha.',
+    icone: 'fas fa-star',
+    pontosBonus: 30,
+    tipo: 'acertos',
+    valorRequerido: 100,
+  },
+  {
+    nome: 'Velocista',
+    descricao: 'Complete uma trilha em menos de 2 minutos.',
+    icone: 'fas fa-bolt',
+    pontosBonus: 15,
+    tipo: 'tempo',
+    valorRequerido: 120,
+  },
+];
+
+async function main() {
+  console.log('Limpando dados antigos de trilhas/perguntas/conquistas...');
+  await prisma.pergunta.deleteMany();
+  await prisma.trilha.deleteMany();
+  await prisma.conquista.deleteMany();
+
+  console.log('Criando trilhas e perguntas...');
+  for (const t of trilhas) {
+    const { perguntas, ...trilhaData } = t;
+    await prisma.trilha.create({
+      data: {
+        ...trilhaData,
+        perguntas: { create: perguntas },
+      },
+    });
+  }
+
+  console.log('Criando conquistas...');
+  await prisma.conquista.createMany({ data: conquistas });
+
+  console.log('Seed concluído com sucesso!');
+}
+
+main()
+  .catch((e) => {
+    console.error(e);
+    process.exit(1);
+  })
+  .finally(async () => {
+    await prisma.$disconnect();
+  });

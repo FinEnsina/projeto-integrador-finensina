@@ -221,7 +221,7 @@ loginForm.addEventListener('submit', async function (e) {
     const email = loginForm.querySelector('input[type="email"]').value;
     const senha = loginForm.querySelector('input[type="password"]').value;
     
-    const res = await fetch('backend/login.php', {
+    const res = await fetch('/api/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, senha })
@@ -258,7 +258,7 @@ signupForm.addEventListener('submit', async function (e) {
         return;
     }
     
-    const res = await fetch('backend/register.php', {
+    const res = await fetch('/api/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ nome, email, senha })
@@ -288,7 +288,7 @@ async function showTrilhas() {
     document.body.style.background = 'var(--color-light-beige)';
     
     try {
-        const response = await fetch('backend/get_trilhas.php');
+        const response = await fetch('/api/trilhas');
         const data = await response.json();
         
         if (data.success) {
@@ -359,7 +359,7 @@ async function showRanking() {
 // Função para carregar ranking
 async function loadRanking() {
     try {
-        const response = await fetch('backend/get_ranking.php');
+        const response = await fetch('/api/ranking');
         const data = await response.json();
         
         if (data.success) {
@@ -428,7 +428,7 @@ async function showProgresso() {
     document.body.style.background = 'var(--color-light-beige)';
     
     try {
-        const response = await fetch(`backend/get_progresso.php?usuario_id=${usuario_id}`);
+        const response = await fetch(`/api/progresso?usuario_id=${usuario_id}`);
         const data = await response.json();
         
         if (data.success) {
@@ -511,7 +511,7 @@ async function startTrilha(trilhaId, trilhaNome) {
     currentTrilha = { id: trilhaId, nome: trilhaNome };
     
     try {
-        const response = await fetch(`backend/get_perguntas.php?trilha_id=${trilhaId}`);
+        const response = await fetch(`/api/perguntas?trilha_id=${trilhaId}`);
         const data = await response.json();
         
         if (data.success && data.perguntas.length > 0) {
@@ -540,7 +540,7 @@ function syncLocalProgress(usuario_id) {
     const localProgress = localStorage.getItem('quiz_progress');
     if (localProgress) {
         const progress = JSON.parse(localProgress);
-        fetch('backend/save_progress.php', {
+        fetch('/api/save-progress', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ 
@@ -662,7 +662,7 @@ function showQuizResult() {
     // Salvar progresso
     const usuario_id = localStorage.getItem('usuario_id');
     if (usuario_id) {
-        fetch('backend/save_progress.php', {
+        fetch('/api/save-progress', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ 
