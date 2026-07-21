@@ -57,5 +57,5 @@ projeto-integrador-finensina/
 
 ## 🚀 Como Executar
 
-Acesse o site: https://educafin.ok.etc.br
+Acesse o site: https://projeto-integrador-finensina.vercel.app
 
